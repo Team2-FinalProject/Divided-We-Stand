@@ -141,3 +141,50 @@
   margin: auto;
   margin-top: 0.5cm;
 }
+
+.nes-table.is-bordered.is-dark.center{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#podium-box {
+  margin: 0 auto;
+  display: flex;
+}
+
+.podium-number {
+  font-weight: bold;
+  font-size: 4em;
+  color: white;
+}
+
+.step-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.step-container>div:first-child {
+  margin-top: auto;
+  text-align: center;
+}
+
+.step {
+  text-align: center;
+}
+
+.bg-blue {
+  background-color: chocolate;
+}
+
+#first-step {
+  height: 50%;
+}
+
+#second-step {
+  height: 35%;
+}
+
+#third-step {
+  height: 30%;
+}

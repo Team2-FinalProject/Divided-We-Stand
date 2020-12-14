@@ -5,6 +5,7 @@ import { Route, Switch } from "react-router-dom"
 import Home from './pages/Home'
 import Lobby from "./pages/Lobby"
 import Room from "./pages/Room"
+import Leaderboard from "./pages/Leadeboard" 
 import "./App.css"
 
 function App() {
@@ -18,6 +19,9 @@ function App() {
       </Route>
       <Route path="/room">
         <Room/>
+      </Route>
+      <Route path="/leaderboard">
+        <Leaderboard/>
       </Route>
     </Switch>
   );
