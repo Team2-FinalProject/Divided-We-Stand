@@ -4,7 +4,7 @@
 import { Route, Switch } from "react-router-dom"
 import Home from './pages/Home'
 import Lobby from "./pages/Lobby"
-import Game from "./pages/Game"
+import Room from "./pages/Room"
 import "./App.css"
 
 function App() {
@@ -14,10 +14,10 @@ function App() {
         <Home/>
       </Route>
       <Route path="/lobby">
-        <Lobby />
+        <Lobby/>
       </Route>
-      <Route path="/game">
-        <Game />
+      <Route path="/room">
+        <Room/>
       </Route>
     </Switch>
   );

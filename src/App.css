@@ -1,8 +1,8 @@
-*{
-  font-family: 'Press Start 2P', cursive;
+* {
+  font-family: "Press Start 2P", cursive;
 }
 
-.mainpage{
+.mainpage {
   align-items: center;
   margin: 200px auto;
   width: 50%;
@@ -12,7 +12,7 @@
   align-items: center;
 }
 
-.nes-field{
+.nes-field {
   width: 50%;
 }
 
@@ -21,38 +21,38 @@
   color: white;
 }
 
-.nes-progress is-success{
+.nes-progress is-success {
   width: 50%;
 }
 
-.bar1{
+.bar1 {
   width: 35%;
   height: 36px;
   display: flex;
 }
 
-.bar2{
+.bar2 {
   width: 35%;
   height: 36px;
   display: flex;
 }
 
-.time-fight-format{
+.time-fight-format {
   color: white;
   font-size: 48px;
   display: flex;
 }
 
-.fight-screen{
+.fight-screen {
   margin-top: 1cm;
   position: sticky;
 }
 
-.row{
+.row {
   display: flex;
 }
 
-.name-fighter-1-format{
+.name-fighter-1-format {
   color: white;
   size: 36px;
   width: 351px;
@@ -61,7 +61,7 @@
   display: flex;
 }
 
-.name-fighter-2-format{
+.name-fighter-2-format {
   color: white;
   size: 36px;
   width: 351px;
@@ -69,50 +69,75 @@
   display: flex;
 }
 
-.nes-textarea{
+.nes-textarea {
   width: 25%;
   height: 48px;
 }
 
-.row.lobby{
+.row.lobby {
   width: auto;
   margin-left: 1cm;
 }
 
-.row.room{
-  margin-top: 1cm;
-  margin-left: 1cm;
+.row.room {
+  justify-content: center;
+  margin-top: 5cm;
 }
 
-.nes-btn.is-success{
+.nes-btn.is-success {
   margin-left: 0.5cm;
 }
 
-.nes-container.is-centered{
+.nes-container.is-centered {
   width: 40%;
   margin-left: 12px;
   margin-top: 12px;
 }
 
-.card.player{
+.card.player {
   background-color: red;
   margin-left: 0.5cm;
 }
-.card.player-2{
+.card.player-2 {
   background-color: aqua;
-  margin-left: 1.5cm;
 }
-.card.player-3{
+.card.player-3 {
   background-color: yellow;
   margin-left: 0.5cm;
   margin-top: 12px;
 }
-.card.player-4{
+.card.player-4 {
   background-color: greenyellow;
-  margin-left: 1.5cm;
   margin-top: 12px;
 }
 
+.versus-logo {
+  width: 50%;
+  height: 50%;
+  margin-left: 0.5cm;
+  margin-right: 0.5cm;
+}
 
+.card.player.before-start {
+  background-color: red;
+}
+.card.player-2.before-start {
+  background-color: aqua;
+}
 
+.col.bst-center {
+  width: 300px;
+}
 
+.versus-logo {
+  width: 200px;
+  height: 200px;
+}
+
+.nes-btn.is-success.start{
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  margin-top: 0.5cm;
+}
