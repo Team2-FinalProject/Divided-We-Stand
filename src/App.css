@@ -2,16 +2,6 @@
   font-family: 'Press Start 2P', cursive;
 }
 
-.mainpage{
-  align-items: center;
-  margin: 200px auto;
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 .nes-field{
   width: 50%;
 }
@@ -75,13 +65,18 @@
 }
 
 .row.lobby{
-  width: auto;
+  width: 100vw;
   margin-left: 1cm;
 }
 
 .row.room{
   margin-top: 1cm;
   margin-left: 1cm;
+}
+
+
+.nes-container.is-centered{
+  width: 26%;
 }
 
 .nes-btn.is-success{
@@ -94,25 +89,36 @@
   margin-top: 12px;
 }
 
+
 .card.player{
-  background-color: red;
-  margin-left: 0.5cm;
-}
-.card.player-2{
-  background-color: aqua;
-  margin-left: 1.5cm;
-}
-.card.player-3{
-  background-color: yellow;
-  margin-left: 0.5cm;
-  margin-top: 12px;
-}
-.card.player-4{
-  background-color: greenyellow;
-  margin-left: 1.5cm;
-  margin-top: 12px;
+  width: 170px;
+  height: 64px;
+  margin-top: 10px;
 }
 
+
+.versus-logo {
+  width: 50%;
+  height: 50%;
+  margin-left: 0.5cm;
+  margin-right: 0.5cm;
+}
+
+.card.player.before-start {
+  background-color: red;
+}
+.card.player-2.before-start {
+  background-color: aqua;
+}
+
+.col.bst-center {
+  width: 300px;
+}
+
+.versus-logo {
+  width: 200px;
+  height: 200px;
+}
 
 
 

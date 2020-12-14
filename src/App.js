@@ -4,7 +4,9 @@ import store from "./store/index";
 import { Route, Switch } from "react-router-dom"
 import Home from './pages/Home'
 import Lobby from "./pages/Lobby"
-import Game from "./pages/Game"
+import Room from "./pages/Room"
+// import Game from "./pages/Game"
+
 import "./App.css"
 
 function App() {
