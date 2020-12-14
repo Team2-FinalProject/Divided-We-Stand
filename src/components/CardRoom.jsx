@@ -6,6 +6,15 @@ import { useHistory } from "react-router-dom";
 export default function CardRoom(props) {
   const { id, name, teamOne, teamTwo, status } = props.data;
   const history = useHistory();
+// import React from "react";
+// import { Card, Button } from "react-bootstrap";
+// import socket from "../connection/socket"
+// import {useHistory} from 'react-router-dom'
+
+// export default function CardRoom(props) {
+  const { id, name, players, status } = props.data
+  const history = useHistory()
+
 
   const handleJoinRoom = (id, name) => {
     let payload = {
@@ -78,5 +87,5 @@ export default function CardRoom(props) {
         </div>
       </div>
     </div>
-  );
+      )
 }

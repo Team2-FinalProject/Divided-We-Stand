@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import Lobby from "./pages/Lobby"
 import Room from "./pages/Room"
 // import Game from "./pages/Game"
+
 import "./App.css"
 
 function App() {
