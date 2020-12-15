@@ -26,13 +26,7 @@ export default function Lobby() {
         username: localStorage.getItem("username"),
       },
     };
-    // dispatch({type: 'server/createRoom', data: roomName})
-    socket.emit("createRoom", payload);
-    formRoom.current.reset();
-        id: localStorage.getItem('id'),
-        username: localStorage.getItem('username'),
-      }
-    };
+
     // dispatch({type: 'server/createRoom', data: roomName})
     socket.emit("createRoom", payload)
     formRoom.current.reset()
@@ -56,6 +50,7 @@ export default function Lobby() {
       setRoom(rooms);
     });
   }, [room]);
+  
   return (
     <section className="fight-screen">
       <div className="row lobby">
