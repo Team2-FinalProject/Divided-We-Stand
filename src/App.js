@@ -6,10 +6,10 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        {/* <Route exact path='/'>
+        <Route exact path='/'>
           <Home />
-        </Route> */}
-        <Route exact path='/game'>
+        </Route>
+        <Route path='/game'>
           <Game />
         </Route>
       </Switch>

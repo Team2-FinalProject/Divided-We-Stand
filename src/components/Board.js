@@ -3,7 +3,7 @@ import Phaser from 'phaser'
 import { IonPhaser } from '@ion-phaser/react'
 import {config} from '../js/game'
 
-var game = new Phaser.Game(config);
+const game = new Phaser.Game(config);
 class Board extends Component { 
   render() {
     return (
