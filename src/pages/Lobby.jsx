@@ -6,6 +6,7 @@ import CardRoom from "../components/CardRoom";
 import socket from "../connection/socket";
 import { v4 as uuidv4 } from "uuid";
 
+
 export default function Lobby() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
@@ -25,9 +26,10 @@ export default function Lobby() {
         username: localStorage.getItem("username"),
       },
     };
+
     // dispatch({type: 'server/createRoom', data: roomName})
-    socket.emit("createRoom", payload);
-    formRoom.current.reset();
+    socket.emit("createRoom", payload)
+    formRoom.current.reset()
   };
 
   //belum kepake
@@ -48,6 +50,7 @@ export default function Lobby() {
       setRoom(rooms);
     });
   }, [room]);
+  
   return (
     <section className="fight-screen">
       <div className="row lobby">

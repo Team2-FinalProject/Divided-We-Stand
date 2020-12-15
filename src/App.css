@@ -1,16 +1,6 @@
 *{
   font-family: 'Press Start 2P', cursive;
 }
-/* 
-.mainpage{
-  align-items: center;
-  margin: 200px auto;
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-} */
 
 .nes-field{
   width: 50%;
@@ -84,35 +74,21 @@
   margin-left: 1cm;
 }
 
-/* .nes-btn.is-success{
-  margin-left: 0.5cm;
-  margin-top: -45px;
-} */
 
 .nes-container.is-centered{
   width: 26%;
+}
+
+.nes-btn.is-success{
+  margin-left: 0.5cm;
+}
+
+.nes-container.is-centered{
+  width: 40%;
   margin-left: 12px;
   margin-top: 12px;
 }
 
-/* .card.player{
-  background-color: red;
-  margin-left: 0.5cm;
-}
-.card.player-2{
-  background-color: aqua;
-  margin-left: 1.5cm;
-}
-.card.player-3{
-  background-color: yellow;
-  margin-left: 0.5cm;
-  margin-top: 12px;
-}
-.card.player-4{
-  background-color: greenyellow;
-  margin-left: 1.5cm;
-  margin-top: 12px;
-} */
 
 .card.player{
   width: 170px;
@@ -144,12 +120,5 @@
   height: 200px;
 }
 
-/* .nes-btn.is-success.start{
-  justify-content: center;
-  display: flex;
-  align-items: center;
-  margin: auto;
-  margin-top: 0.5cm;
-} */
 
 
