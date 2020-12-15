@@ -13,9 +13,6 @@ export default function Room() {
     socket.on("roomDetail", (room) => {
       setRoomDetail(room); // team1 nanda, team2 rivari, roomDetail.id
     });
-    socket.on("startGame", (room) => {
-      setRoomDetail(room);
-    });
   }, []);
 
   useEffect(() => {
@@ -30,7 +27,8 @@ export default function Room() {
       id: roomDetail.id,
       name: roomDetail.name,
     };
-    socket.emit("startGame", payload);
+    socket.emit("startGame", payload)
+    history.push(`/game/${roomName}`)
   };
 
   return (
@@ -68,7 +66,7 @@ export default function Room() {
           </div>
         </div>
         <Button className="position-absolute" style={{ top: "68%"}} onClick={handleStartGame}>
-          test
+          START
         </Button>
       </div>
     </section>
