@@ -120,5 +120,13 @@
   height: 200px;
 }
 
+.nes-container{
+  background-image: url(https://images.freecreatives.com/wp-content/uploads/2016/03/Outer-Space-Galaxy-Background.jpg);
+  border: 1px solid #273c75;
+}
 
+.nes-container:hover{
+  background-image: url(https://cdn.pixabay.com/photo/2018/12/18/22/29/background-3883180_1280.jpg);
+  border: 3px solid #40739e;
+}
 

@@ -53,21 +53,21 @@ export default function Lobby() {
   
   return (
     <section className="fight-screen">
-      <div className="row lobby">
+      <div className="row lobby mb-4">
         <Form onSubmit={handleSubmitRoom} ref={formRoom} style={{ width: 2000}}>
-          <textarea
+          <input
             className="nes-textarea"
             placeholder="Create Room"
             ref={nameRoom}
             required
-          ></textarea>
+          ></input>
           <Button type="submit" className="nes-btn is-success">
             Submit
           </Button>
         </Form>
       </div>
 
-      <div className="row">
+      <div className="row d-flex justify-content-center">
 
         {room.map(item => (
           <CardRoom data={item} key={item.id} />
