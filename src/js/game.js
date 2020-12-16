@@ -1,5 +1,4 @@
 import Phaser from 'phaser'
-import React from 'react'
 import socket from '../connection/socket'
 
 //socket
@@ -298,6 +297,11 @@ function create() {
     })
     this.physics.add.collider(meteor2, control2, () => {
         music.play();
+    })
+
+    this.data.list.socket.on('startGame', data => {
+        console.log(data,  "<<< data di socket preload")
+        gamePlayers = data
     })
 
 }
