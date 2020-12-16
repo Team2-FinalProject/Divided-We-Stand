@@ -1,13 +1,6 @@
 import Phaser from 'phaser'
 import React from 'react'
 
-// export default function game(){
-
-//     return(
-
-//     )
-// }
-
 var audio = new Audio(require("../sound/PUNCH.mp3"))
 var music;
 var meteor;
@@ -24,6 +17,12 @@ var bgm;
 var scorep1 = 0
 var scorep2 = 0
 var scoreText
+var control1
+var control1Hip1
+var control2
+var control1Hip2
+var char1
+var char2
 
 export const config = {
     type: Phaser.AUTO,
@@ -47,7 +46,7 @@ export const config = {
             ]
         }
     },
-    audio:{
+    audio: {
         disableWebAudio: false,
         context: audio.webkitMatchesSelector(true)
     }
@@ -62,9 +61,9 @@ function preload() {
     this.load.image('pow', '../../image/hit.gif');
     this.load.image('goal', '../../image/blackhole.png')
     this.load.image('hitarea', '../../image/hitround.png')
-    this.load.audio('hit', ['../../sound/PUNCH.ogg','../../sound/PUNCH.mp3'])
-    this.load.audio('goal', ['../../sound/selected.ogg','../../sound/selected.mp3'])
-    this.load.audio('bgm', ['../../sound/fightSoundtrack.ogg','../../sound/fightSoundtrack.mp3'])
+    this.load.audio('hit', ['../../sound/PUNCH.ogg', '../../sound/PUNCH.mp3'])
+    this.load.audio('goal', ['../../sound/selected.ogg', '../../sound/selected.mp3'])
+    this.load.audio('bgm', ['../../sound/fightSoundtrack.ogg', '../../sound/fightSoundtrack.mp3'])
 }
 
 function generateChar({ pos, scale, flipper }) {
@@ -84,57 +83,76 @@ function generateChar({ pos, scale, flipper }) {
     return char
 }
 
+// let hipX
+// let hipY
+
 function assignControlToChar(char, obj) {
     var controlBones = ["front-leg-ik-target", "hip"];
+
     // var controlBones = ["front-leg-ik-target", "hip", "back-leg-ik-target"];
     if (obj === "feet") {
         let bone = char.findBone(controlBones[0]);
         var control = this.physics.add.image(bone.worldX, 670 - (bone.worldY), 'hitarea').setData('bone', bone).setScale(0.3, 0.3);
-            control.body.immovable = true
-            control.setBounce(3, 3)
-            control.setCollideWorldBounds(true)
+        control.body.immovable = true
+        control.setBounce(3, 3)
+        control.setCollideWorldBounds(true)
 
-            control.setInteractive();
+        control.setInteractive();
 
-            this.input.setDraggable(control);
-            this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
+        // this.input.setDraggable(control);
+        // this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
+        //     gameObject.x = dragX;
+        //     gameObject.y = dragY;
 
-                gameObject.x = dragX;
-                gameObject.y = dragY;
-    
-                var bone = gameObject.getData('bone');
-    
-                var coords = this.spine.worldToLocal(dragX, dragY, char.skeleton, bone);
-    
-                bone.x = coords.x;
-                bone.y = coords.y;
-                
-                bone.update();
-                char.refresh()
-            }, this);
-            return control
+        //     var bone = gameObject.getData('bone');
+
+        //     var coords = this.spine.worldToLocal(dragX, dragY, char.skeleton, bone);
+
+        //     bone.x = coords.x;
+        //     bone.y = coords.y;
+
+        //     // hipX = bone.x
+        //     // hipY = bone.y
+
+        //     bone.update();
+        //     char.refresh()
+        // }, this);
+        return control
     } else if (obj === "hip") {
         let bone = char.findBone(controlBones[1]);
         var controlHip = this.add.circle(bone.worldX, 800 - (bone.worldY), 10, 0xff00000).setData('bone', bone);
-            controlHip.setInteractive();
+        controlHip.setInteractive();
 
-            this.input.setDraggable(controlHip);
-            this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
+        // this.input.setDraggable(controlHip);
+        // this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
 
-                gameObject.x = dragX;
-                gameObject.y = dragY;
-    
-                var bone = gameObject.getData('bone');
-    
-                var coords = this.spine.worldToLocal(dragX, dragY, char.skeleton, bone);
-    
-                bone.x = coords.x;
-                bone.y = coords.y;
-                
-                bone.update();
-                char.refresh()
-            }, this);
+        //     gameObject.x = dragX;
+        //     gameObject.y = dragY;
 
+        //     var bone = gameObject.getData('bone');
+
+        //     var coords = this.spine.worldToLocal(dragX, dragY, char.skeleton, bone);
+
+        //     bone.x = coords.x;
+        //     bone.y = coords.y;
+
+        //     // if(coords.x < hipX + 100 && coords.x > hipX - 100) {
+        //     //     bone.x = coords.x
+        //     // } else {
+        //     //     bone.x = hipX
+        //     // }
+
+        //     // if(coords.y < hipY + 100 && coords.y > hipY - 100) {
+        //     //     bone.y = coords.y
+        //     // } else {
+        //     //     bone.y = hipY
+        //     // }
+        //     // console.log(hipX, "alsdhasjdhas");
+
+        //     bone.update();
+        //     char.refresh()
+        // }, this);
+        return controlHip
     }
 }
 
@@ -153,53 +171,41 @@ function create() {
 
 
     //SCORE
-    scoreText = this.add.text(616,310, `${scorep1}:${scorep2}`, {fontSize: '70px', fill: '#ffffff'})
-    
+    scoreText = this.add.text(616, 310, `${scorep1}:${scorep2}`, { fontSize: '70px', fill: '#ffffff' })
+
     //END SCORE
 
     //MUSIC ASSIGN
-    music = this.sound.add('hit',{
+    music = this.sound.add('hit', {
         volume: 0.09
     })
 
-    goalSound = this.sound.add('goal',{
-        volume: 0.1
+    goalSound = this.sound.add('goal', {
+        volume: 1
     })
-    bgm = this.sound.add('bgm',{
-        volume: 0.1
+    bgm = this.sound.add('bgm', {
+        volume: 0.5
     })
     //ENDMUSIC ASSIGN
 
     let char = generateChar.bind(this)
     let control = assignControlToChar.bind(this)
 
-    let char1 = char({
+    char1 = char({
         pos: { x: 400, y: 500 },
         scale: { x: 0.3, y: 0.3 },
         flipper: false
     })
-    let char2 = char({
+    char2 = char({
         pos: { x: 900, y: 500 },
         scale: { x: -0.3, y: 0.3 },
         flipper: true
     })
 
-    let control1 = control(char1, "feet")
-    let control1Hip1 = control(char1, "hip")
-    let control2 = control(char2, "feet")
-    let control1Hip2 = control(char2, "hip")
-
-    console.log('char----->', char1)
-    console.log(this.sound.add('hit'), '<<<<<<<<<<audio bos')
-    console.log('----->', this.children)
-
-    // this.physics.add.collider(char2, char1, (parent, key, value) => {
-    //     console.log('damage hero 1', parent, key, value)
-    // })
-
-    // this.physics.add.collider(char2, char1, () => {
-    //     console.log('damage hero 1')
-    // })
+    control1 = control(char1, "feet")
+    control1Hip1 = control(char1, "hip")
+    control2 = control(char2, "feet")
+    control1Hip2 = control(char2, "hip")
 
     //METEOR
     particles = this.add.particles('particle');
@@ -218,7 +224,7 @@ function create() {
     meteor = this.physics.add.image(100, 100, 'meteor').setScale(0.1, 0.1);
     meteor.enableBody = true
     meteor.setVelocity(330, 50);
-    meteor.setBounce(1, 1);
+    meteor.setBounce(1, 1.05);
     meteor.setCollideWorldBounds(true);
 
     emitter.startFollow(meteor);
@@ -226,7 +232,7 @@ function create() {
     meteor2 = this.physics.add.image(1000, 100, 'meteor').setScale(0.1, 0.1);
     meteor2.enableBody = true
     meteor2.setVelocity(600, 50);
-    meteor2.setBounce(1, 1);
+    meteor2.setBounce(1, 1.05);
     meteor2.setCollideWorldBounds(true);
 
     emitter2.startFollow(meteor2);
@@ -242,46 +248,40 @@ function create() {
     rightGoal.body.immovable = true
     //END GAWANG
 
-    // var shooter = this.physics.add.image(char1.x, char1.y, 'hitarea').setScale(0.5, 0.5);
-    // shooter.body.setSize(100, 100)
-    // shooter.setBounce(2, 2);
-    // shooter.body.immovable = true
-
-    
     bgm.play()
-    
+
     // this.sound.setDecodedCallback(music, this);
-    this.physics.add.collider(meteor,char1, () =>{
+    this.physics.add.collider(meteor, char1, () => {
         music.play();
     })
-    this.physics.add.collider(meteor2,char1, () =>{
+    this.physics.add.collider(meteor2, char1, () => {
         music.play();
     })
-    this.physics.add.collider(meteor,char2, () =>{
+    this.physics.add.collider(meteor, char2, () => {
         music.play();
     })
-    this.physics.add.collider(meteor2,char2, () =>{
+    this.physics.add.collider(meteor2, char2, () => {
         music.play();
     })
     this.physics.add.collider(char1, char2, () => {
         console.log('kena');
     })
-    this.physics.add.collider(meteor, control1, () =>{
+    this.physics.add.collider(meteor, control1, () => {
         music.play();
     })
-    this.physics.add.collider(meteor2, control1, () =>{
+    this.physics.add.collider(meteor2, control1, () => {
         music.play();
     })
-    this.physics.add.collider(meteor, control2, () =>{
+    this.physics.add.collider(meteor, control2, () => {
         music.play();
     })
-    this.physics.add.collider(meteor2, control2, () =>{
+    this.physics.add.collider(meteor2, control2, () => {
         music.play();
     })
-    
+
 }
 
-function update () {
+function update() {
     meteor.rotation += 0.10;
     meteor2.rotation += 0.10;
     emitter.rotation += 0.10;
@@ -289,7 +289,7 @@ function update () {
     rightGoal.rotation += 0.002;
     leftGoal.rotation -= 0.002;
 
-    this.physics.add.collider(meteor, leftGoal,goalp2, () => {
+    this.physics.add.collider(meteor, leftGoal, goalp2, () => {
         meteor.destroy()
         particles.destroy()
         goalSound.play()
@@ -299,32 +299,52 @@ function update () {
         particles2.destroy()
         goalSound.play()
     })
-    this.physics.add.collider(meteor, rightGoal,goalp1, () => {
+    this.physics.add.collider(meteor, rightGoal, goalp1, () => {
         meteor.destroy()
         particles.destroy()
         goalSound.play()
     })
-    this.physics.add.collider(meteor2, rightGoal,goalp1, () => {
+    this.physics.add.collider(meteor2, rightGoal, goalp1, () => {
         meteor2.destroy()
         particles2.destroy()
         goalSound.play()
     })
 
-    function goalp1(){
+    function goalp1() {
         scorep1 += 1
         scoreText.text = `${scorep1}:${scorep2}`
     }
-    function goalp2(){
+    function goalp2() {
         scorep2 += 1
         scoreText.text = `${scorep1}:${scorep2}`
     }
+
+    const players = [control1, control1Hip1, control2, control1Hip2]
+    players.forEach(el => {
+        this.input.setDraggable(el);
+        this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
+            gameObject.x = dragX;
+            gameObject.y = dragY;
+    
+            var bone = gameObject.getData('bone');
+
+            let charObj
+            if (el === control1 && el === control1Hip1) {
+                charObj = char1
+            } else {
+                charObj = char2
+            }
+    
+            var coords = this.spine.worldToLocal(dragX, dragY, charObj.skeleton, bone);
+    
+            bone.x = coords.x;
+            bone.y = coords.y;
+    
+            // hipX = bone.x
+            // hipY = bone.y
+    
+            bone.update();
+            charObj.refresh()
+        }, this);
+    })
 }
-
-// function fadePicture(effect) {
-//     this.add.tween(effect).to( { alpha: 0 }, 2000, Phaser.Easing.Linear.None, true);
-// }
-
-// function destroyMeteor (meteor, leftGoal) {
-//     console.log('masuuuk');
-//     meteor.destroy()
-// }
