@@ -6,6 +6,7 @@ import Home from './pages/Home'
 import Lobby from "./pages/Lobby"
 import Room from "./pages/Room"
 import Game from "./pages/Game"
+import Finish from './pages/Finish'
 import "./App.css"
 
 function App() {
@@ -23,6 +24,9 @@ function App() {
         </Route>
         <Route path="/game/:roomName">
           <Game />
+        </Route>
+        <Route path="/finish">
+          <Finish />
         </Route>
       </Switch>
     </Provider>
