@@ -65,7 +65,7 @@ export default function Room() {
             </div>
           </div>
         </div>
-        <Button className="position-absolute" style={{ top: "68%"}} onClick={handleStartGame}>
+        <Button className="position-absolute mt-5" style={{ top: "68%"}} onClick={handleStartGame}>
           START
         </Button>
       </div>

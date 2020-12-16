@@ -6,7 +6,8 @@ import { useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from "uuid";
 // import { SET_PLAYERS } from '../store/actions/socket'
 import "../App.css";
-
+import img from '../assets/coollogo_com-13460545.png'
+import '../Home.css'
 // export default function Home() {
 //   return (
 //     <div className="mainpage">
@@ -48,18 +49,23 @@ export default function Home() {
   };
 
   return (
-    <Container>
-      <form onSubmit={handleLogin}>
+    <div className="container mb-5 mt-5">
+      <img src={img} className="mt-5 mb-5" style={{ justifyContent: "center"}} alt=""/>
+      <form onSubmit={handleLogin} className="form mt-5">
         <div className="form-group">
           <input
             type="text"
             className="form-control"
             placeholder="input your name"
             onChange={handleUsername}
-          />
-          <Button type="submit">Submit</Button>
+            style={{ alignItems: "center", width: "25rem", textAlign: "center"}}
+          /> <br />
+          <div className="button">
+            <button style={{alignItems: "center"}} type="submit">Submit</button>
+
+          </div>
         </div>
       </form>
-    </Container>
+    </div>
   );
 }

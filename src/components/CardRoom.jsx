@@ -12,8 +12,8 @@ export default function CardRoom(props) {
 // import {useHistory} from 'react-router-dom'
 
 // export default function CardRoom(props) {
-  const { id, name, players, status } = props.data
-  const history = useHistory()
+  // const { id, name, players, status } = props.data
+  // const history = useHistory()
 
 
   const handleJoinRoom = (id, name) => {
@@ -38,7 +38,7 @@ export default function CardRoom(props) {
   }
 
   return (
-    <div className="nes-container with-title is-centered">
+    <div className="nes-container with-title is-centered mt-3">
       <p className="title">{name}</p>
       <div className="d-flex justify-content-between">
         <div className="team-1">
