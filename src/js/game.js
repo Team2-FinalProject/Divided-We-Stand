@@ -1,5 +1,11 @@
 import Phaser from 'phaser'
 import React from 'react'
+import socket from '../connection/socket'
+
+//socket
+var gamePlayers
+
+//end socket
 
 var audio = new Audio(require("../sound/PUNCH.mp3"))
 var music;
@@ -24,33 +30,42 @@ var control1Hip2
 var char1
 var char2
 
-export const config = {
+export const config = () => {
+  return {
     type: Phaser.AUTO,
-    width: '100%',
-    height: '100%',
-    backgroundColor: '#cdcdcd',
+    width: "100%",
+    height: "100%",
+    backgroundColor: "#cdcdcd",
     physics: {
-        default: 'arcade',
-        arcade: {
-            // debug: true,
-            gravity: { y: 0 }
-        }
+      default: "arcade",
+      arcade: {
+        // debug: true,
+        gravity: { y: 0 },
+      },
     },
     scene: {
-        preload: preload,
-        create: create,
-        update: update,
-        pack: {
-            files: [
-                { type: 'scenePlugin', key: 'SpinePlugin', url: 'plugins/SpinePlugin.js', sceneKey: 'spine' }
-            ]
-        }
+      preload: preload,
+      create: create,
+      update: update,
+      extend: { data: { socket } },
+      pack: {
+        files: [
+          {
+            type: "scenePlugin",
+            key: "SpinePlugin",
+            url: "plugins/SpinePlugin.js",
+            sceneKey: "spine",
+          },
+        ],
+      },
     },
+    socket: socket,
     audio: {
-        disableWebAudio: false,
-        context: audio.webkitMatchesSelector(true)
-    }
-}
+      disableWebAudio: false,
+      context: audio.webkitMatchesSelector(true),
+    },
+  };
+};
 
 function preload() {
     this.load.setPath('assets/spine/stretchyman/');
@@ -64,7 +79,14 @@ function preload() {
     this.load.audio('hit', ['../../sound/PUNCH.ogg', '../../sound/PUNCH.mp3'])
     this.load.audio('goal', ['../../sound/selected.ogg', '../../sound/selected.mp3'])
     this.load.audio('bgm', ['../../sound/fightSoundtrack.ogg', '../../sound/fightSoundtrack.mp3'])
+    this.data.list.socket.on('hello', data => {
+        console.log(data,  "<<< data di socket preload")
+        gamePlayers = data
+    })
+    console.log(this.data.list.socket, "<<< this di preload")
 }
+
+console.log(gamePlayers, ",,, game players di game")
 
 function generateChar({ pos, scale, flipper }) {
     var char = this.add.spine(pos.x, pos.y, 'stretchyman').setScale(scale.x, scale.y).refresh();
@@ -157,7 +179,6 @@ function assignControlToChar(char, obj) {
 }
 
 function create() {
-
     let image = this.add.image(
         this.cameras.main.width / 2,
         this.cameras.main.height / 2,
@@ -329,7 +350,7 @@ function update() {
             var bone = gameObject.getData('bone');
 
             let charObj
-            if (el === control1 && el === control1Hip1) {
+            if (el === control1 || el === control1Hip1) {
                 charObj = char1
             } else {
                 charObj = char2

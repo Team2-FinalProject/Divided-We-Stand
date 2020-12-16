@@ -30,6 +30,7 @@ export default function Lobby() {
     // dispatch({type: 'server/createRoom', data: roomName})
     socket.emit("createRoom", payload)
     formRoom.current.reset()
+    console.log("this");
   };
 
   //belum kepake

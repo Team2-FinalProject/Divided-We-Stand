@@ -17,12 +17,14 @@ export default function Room() {
 
   useEffect(() => {
     socket.on("moveRoom", (room) => {
-      setRoomDetail(room); // team1 nanda, team2 rivari, roomDetail.id
+      // setRoomDetail(room); // team1 nanda, team2 rivari, roomDetail.id
+      console.log(room, "<< room di room js 'moveRoom'");
+      history.push(`/game`);
     });
-    if (roomDetail) {
-      roomDetail.status === true && history.push(`/game`);
-    }
-  }, [roomDetail]);
+    // if (roomDetail) {
+    //   roomDetail.status === true && history.push(`/game/${roomDetail.name}`);
+    // }
+  }, [roomDetail])
 
   const handleStartGame = () => {
     console.log("this start game button");
@@ -45,9 +47,6 @@ export default function Room() {
             <div className="card player">
               <div className="card-body">{roomDetail?.teamOne[1]}</div>
             </div>
-            <div className="card player">
-              <div className="card-body">{roomDetail?.teamOne[2]}</div>
-            </div>
           </div>
           <div>
             <img
@@ -63,9 +62,7 @@ export default function Room() {
             <div className="card player">
               <div className="card-body">{roomDetail?.teamTwo[1]}</div>
             </div>
-            <div className="card player">
-              <div className="card-body">{roomDetail?.teamTwo[2]}</div>
-            </div>
+
           </div>
         </div>
         <Button className="position-absolute mt-5" style={{ top: "68%"}} onClick={handleStartGame}>
