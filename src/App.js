@@ -21,7 +21,7 @@ function App() {
         <Route path="/room/:roomName">
           <Room />
         </Route>
-        <Route path="/game/:roomName">
+        <Route path="/game">
           <Game />
         </Route>
       </Switch>

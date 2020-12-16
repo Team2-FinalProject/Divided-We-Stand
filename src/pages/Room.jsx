@@ -16,8 +16,11 @@ export default function Room() {
   }, []);
 
   useEffect(() => {
+    socket.on("moveRoom", (room) => {
+      setRoomDetail(room); // team1 nanda, team2 rivari, roomDetail.id
+    });
     if (roomDetail) {
-      roomDetail.status === true && history.push(`/game/${roomName}`);
+      roomDetail.status === true && history.push(`/game`);
     }
   }, [roomDetail]);
 
@@ -28,7 +31,7 @@ export default function Room() {
       name: roomDetail.name,
     };
     socket.emit("startGame", payload)
-    history.push(`/game/${roomName}`)
+    // history.push(`/game/${roomName}`)
   };
 
   return (
