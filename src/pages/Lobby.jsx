@@ -5,7 +5,8 @@ import { useHistory } from "react-router-dom";
 import CardRoom from "../components/CardRoom";
 import socket from "../connection/socket";
 import { v4 as uuidv4 } from "uuid";
-
+import mp3 from '../sound/BGM/Cinematic_Drum.mp3'
+import ReactAudioPlayer from 'react-audio-player'
 
 export default function Lobby() {
   const dispatch = useDispatch();
@@ -57,6 +58,13 @@ export default function Lobby() {
   
   return (
     <section className="fight-screen">
+      <ReactAudioPlayer 
+        controls
+        autoPlay
+        src={mp3}
+        loop
+        style={{ display: "none"}}
+      />
       <div className="row lobby mb-4">
         <Form onSubmit={handleSubmitRoom} ref={formRoom} style={{ width: 2000}}>
           <input

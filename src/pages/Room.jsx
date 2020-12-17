@@ -3,6 +3,8 @@ import { Container, Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import socket from "../connection/socket";
 import { useHistory } from "react-router-dom";
+import mp3 from '../sound/BGM/Cinematic_Drum.mp3'
+import ReactAudioPlayer from 'react-audio-player'
 
 export default function Room() {
   const { roomName } = useParams();
@@ -37,6 +39,13 @@ export default function Room() {
 
   return (
     <section style={{ height: "80vh" }}>
+       <ReactAudioPlayer 
+        controls
+        autoPlay
+        src={mp3}
+        loop
+        style={{ display: "none"}}
+      />
       <div className="row justify-content-center align-content-center h-100 position-relative">
         <div className="d-flex">
           <div className="column">

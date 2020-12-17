@@ -6,8 +6,10 @@ import { useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from "uuid";
 // import { SET_PLAYERS } from '../store/actions/socket'
 import "../App.css";
-import img from '../assets/coollogo_com-13460545.png'
+import img from '../assets/coollogo_com-18909269.png'
 import '../Home.css'
+import mp3 from '../sound/BGM/Star Wars Battle Theme FULL.mp3'
+import ReactAudioPlayer from 'react-audio-player'
 // export default function Home() {
 //   return (
 //     <div className="mainpage">
@@ -41,17 +43,26 @@ export default function Home() {
       username, id
     }
     // socket.emit("login", username);
-    dispatch({type:'server/players', data});
+    dispatch({ type: 'server/players', data });
     // dispatch(SET_PLAYERS)
-};
+  };
 
   const handleUsername = (e) => {
     setUsername(e.target.value);
   };
+  // <video src={videoSource} ref={videoPlayer} onLoadedData={() => videoPlayer.current.play()}/>
 
   return (
     <div className="container mb-5 mt-5">
-      <img src={img} className="mt-5 mb-5" style={{ justifyContent: "center"}} alt=""/>
+      <ReactAudioPlayer 
+        controls
+        autoPlay
+        src={mp3}
+        loop
+        style={{ display: "none"}}
+      />
+      
+      <img src={img} className="mt-5 mb-5" style={{ justifyContent: "center" }} alt="" />
       <form onSubmit={handleLogin} className="form mt-5">
         <div className="form-group">
           <input
@@ -59,10 +70,10 @@ export default function Home() {
             className="form-control"
             placeholder="input your name"
             onChange={handleUsername}
-            style={{ alignItems: "center", width: "25rem", textAlign: "center"}}
+            style={{ alignItems: "center", width: "25rem", textAlign: "center" }}
           /> <br />
           <div className="button">
-            <button style={{alignItems: "center"}} type="submit">Submit</button>
+            <button style={{ alignItems: "center" }} type="submit">Submit</button>
 
           </div>
         </div>

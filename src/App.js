@@ -5,8 +5,13 @@ import { Route, Switch } from "react-router-dom"
 import Home from './pages/Home'
 import Lobby from "./pages/Lobby"
 import Room from "./pages/Room"
+<<<<<<< HEAD
 import Game from "./pages/Game.js"
 import Finish from "./pages/Finish"
+=======
+import Game from "./pages/Game"
+import Finish from './pages/Finish'
+>>>>>>> 3f76e08f1b446ad5b7c0830077c5e60129cb9084
 import "./App.css"
 
 function App() {
