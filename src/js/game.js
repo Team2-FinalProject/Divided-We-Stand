@@ -523,12 +523,24 @@ function create() {
   function goalp1() {
     scorep1 += 1;
     finish -= 1;
+    let payload = {
+      room: gamePlayers.room,
+      score: scorep1,
+      team: 'teamOne'
+    }
+    socket.emit('score', payload)
     scoreText.text = `${scorep1}:${scorep2}`;
   }
-
+  
   function goalp2() {
     scorep2 += 1;
     finish -= 1;
+    let payload = {
+      room: gamePlayers.room,
+      score: scorep2,
+      team: 'teamTwo'
+    }
+    socket.emit('score', payload)
     scoreText.text = `${scorep1}:${scorep2}`;
   }
 
