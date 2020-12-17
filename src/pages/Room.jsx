@@ -18,7 +18,6 @@ export default function Room() {
   useEffect(() => {
     socket.on("moveRoom", (room) => {
       // setRoomDetail(room); // team1 nanda, team2 rivari, roomDetail.id
-      console.log(room, "<< room di room js 'moveRoom'");
       history.push(`/game`);
     });
     // if (roomDetail) {

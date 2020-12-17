@@ -5,7 +5,8 @@ import { Route, Switch } from "react-router-dom"
 import Home from './pages/Home'
 import Lobby from "./pages/Lobby"
 import Room from "./pages/Room"
-import Game from "./pages/Game"
+import Game from "./pages/Game.js"
+import Finish from "./pages/Finish"
 import "./App.css"
 
 function App() {
@@ -23,6 +24,9 @@ function App() {
         </Route>
         <Route path="/game">
           <Game />
+        </Route>
+        <Route path="/finish">
+          <Finish />
         </Route>
       </Switch>
     </Provider>

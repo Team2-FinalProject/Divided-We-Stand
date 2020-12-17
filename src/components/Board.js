@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Phaser from 'phaser'
+// import Phaser from 'phaser'
 import { IonPhaser } from '@ion-phaser/react'
 import { config } from '../js/game'
 import socket from '../connection/socket'
@@ -11,7 +11,7 @@ export default function Board() {
   // setGame()
 
   React.useEffect(() => {
-    const configs = new Phaser.Game(config(socket))
+    const configs = config(socket)
     console.log(configs, "<<< configs di board")
     // debugger
     // setInterval(() => {

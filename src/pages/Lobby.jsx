@@ -41,6 +41,9 @@ export default function Lobby() {
     if (state.rooms.length > 0) {
       setRoom(state.rooms);
     }
+    socket.on("hello", data => {
+      console.log(data, "from lobby");
+    })
   }, []);
 
   useEffect(() => {

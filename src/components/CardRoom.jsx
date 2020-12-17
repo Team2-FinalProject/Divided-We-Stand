@@ -7,6 +7,16 @@ export default function CardRoom(props) {
   const { id, name, teamOne, teamTwo, status } = props.data;
   const history = useHistory();
 
+  const handleJoinRoom = (id, name) => {
+    let payload = {
+      roomName: name,
+      idRoom: id,
+      username: localStorage.getItem("username"),
+    };
+    socket.emit("joinRoom", payload);
+    history.push(`/room/${name}`);
+  };
+
   const handleJoinTeam = (tim) => {
     let payload = {
       roomName: name,
@@ -19,11 +29,16 @@ export default function CardRoom(props) {
   }
 
   return (
-    <div className="nes-container with-title is-centered mt-3">
+    <div className="nes-container with-title is-centered">
       <p className="title">{name}</p>
       <div className="d-flex justify-content-between">
         <div className="team-1">
           <span className="text-light">Team 1</span>
+          {/* {teamOne.map((e) => (
+            <div className="card player">
+              <div className="card-body">{e}</div>
+            </div>
+          ))} */}
           <div className="card player">
             <div className="card-body">{teamOne[0]}</div>
           </div>

@@ -26,6 +26,7 @@ import '../Home.css'
 
 
 export default function Home() {
+  // console.log(socket)
   const history = useHistory();
   const [username, setUsername] = useState("");
   const dispatch = useDispatch()
