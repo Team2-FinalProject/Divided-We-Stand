@@ -4,13 +4,45 @@ import socket from "../connection/socket";
 
 //socket
 var gamePlayers;
-var boneX;
-var boneY;
+var boneX1 = 400
+var boneY1 = 500;
+
+var isPosUpdated = false;
+
+var boneX2 = 900;
+var boneY2 = 500;
+
+var scoreOne = 0;
+var scoreTwo = 0;
+
 
 socket.on("updateBone", (data) => {
-  // console.log(data, "ini update bone");
-  boneX = data.x;
-  boneY = data.y;
+  // console.log(data, "ini update bone")
+  if (data.user.team === "teamOne") {
+    boneX1 = data.user.cordinatX;
+    boneY1 = data.user.cordinatY;
+  } else {
+    boneX2 = data.user.cordinatX;
+    boneY2 = data.user.cordinatY;
+  }
+  // console.log(boneX1, boneY1, "char kiri")
+  // console.log(boneX2, boneY2, "char kanan")
+  isPosUpdated = true;
+})
+
+socket.on("startGame", (data) => {
+  // console.log(data, "geheheh");
+  gamePlayers = data;
+});
+
+// console.log(gamePlayers, "ini game players di global")
+
+socket.on("scoreP1", (data) => {
+  scoreOne = data.scoreTeamOne;
+});
+
+socket.on("scoreP1", (data) => {
+  scoreTwo = data.scoreTeamTwo;
 });
 
 // console.log(boneX);
@@ -41,9 +73,9 @@ var bgm;
 var scorep1 = 0;
 var scorep2 = 0;
 var scoreText;
-var control1;
+// var control1;
 var control1Hip1;
-var control2;
+// var control2;
 var control1Hip2;
 var char1;
 var char2;
@@ -119,8 +151,6 @@ function preload() {
   // console.log(this.data.list.socket, "<<< this di preload")
 }
 
-// console.log(gamePlayers, ",,, game players di game");
-
 function generateChar({ pos, scale, flipper }) {
   var char = this.add
     .spine(pos.x, pos.y, "stretchyman")
@@ -145,10 +175,10 @@ function generateChar({ pos, scale, flipper }) {
 }
 
 function assignControlToChar(char, obj) {
-  var controlBones = ["front-leg-ik-target", "hip"];
+  // var controlBones = ["front-leg-ik-target", "hip"];
+  var controlBones = ["hip"];
 
   // var controlBones = ["front-leg-ik-target", "hip", "back-leg-ik-target"];
-  console.log(boneX, boneY, 'ini diluar kondisi')
   if (obj === "feet") {
     let bone = char.findBone(controlBones[0]);
     var control = this.physics.add
@@ -168,7 +198,7 @@ function assignControlToChar(char, obj) {
     //   function (pointer, gameObject, dragX, dragY) {
     //     gameObject.x = dragX;
     //     gameObject.y = dragY;
-// bone.worldX, 800 - bone.worldY
+    // bone.worldX, 800 - bone.worldY
     //     var bone = gameObject.getData("bone");
 
     //     // let charObj;
@@ -208,7 +238,8 @@ function assignControlToChar(char, obj) {
 
     return control;
   } else if (obj === "hip") {
-    let bone = char.findBone(controlBones[1]);
+    // let bone = char.findBone(controlBones[1]);
+    let bone = char.findBone(controlBones[0]);
     var controlHip = this.add
       .circle(bone.worldX, 800 - bone.worldY, 10, 0xff00000)
       .setData("bone", bone);
@@ -252,7 +283,9 @@ function assignControlToChar(char, obj) {
   }
 }
 
-function create(a) {
+function create() {
+
+
   // socket = io('http://localhost:3000')
   // console.log(this.socket,'ini socket nya bosss -<<<<<')
   //   console.log(this.input,'ini this input')
@@ -287,6 +320,8 @@ function create(a) {
     fill: "#ffffff",
   });
 
+  console.log(control1Hip1, "ini apa");
+
   //END SCORE
 
   //MUSIC ASSIGN
@@ -301,45 +336,64 @@ function create(a) {
     volume: 0.5,
   });
   //ENDMUSIC ASSIGN
-
+  
   let char = generateChar.bind(this);
   let control = assignControlToChar.bind(this);
-
-    char1 = char({
-      pos: { x: boneX, y: boneY },
-      scale: { x: 0.3, y: 0.3 },
-      flipper: false,
-    })
+  
+  char1 = char({
+    pos: { x: 400, y: 500 },
+    scale: { x: 0.3, y: 0.3 },
+    flipper: false,
+  });
   char2 = char({
     pos: { x: 900, y: 500 },
     scale: { x: -0.3, y: 0.3 },
     flipper: true,
   });
 
-  control1 = control(char1, "feet");
+  
+
+  // char1.x.update()
+  // char1.y.update()
+  // char2.x.update()
+  // char2.y.update()
+  // control1 = control(char1, "feet");
   control1Hip1 = control(char1, "hip");
-  control2 = control(char2, "feet");
+  // control2 = control(char2, "feet");
   control1Hip2 = control(char2, "hip");
 
+  //   console.log(char1.x ,'<>', boneX1 );
+  // char1.x = boneX1
+  // char1.y = boneY1
+
+  // char2.x = boneX2
+  // char2.y = boneY2
+  // char1.update()
+  // char2.update()
+  // char2.setPosition(boneX2, boneY2);
+  //   char1.update()
+  //   char2.update()
+  // char2.setPosition(boneX, boneY)
+  // control1Hip1.setPosition(1000, 600) // ini titik merah
   //METEOR
-  particles = this.add.particles("particle");
-  particles2 = this.add.particles("particle");
-  particles3 = this.add.particles("particle");
-  emitter = particles.createEmitter({
-    speed: 100,
-    scale: { start: 0.03, end: 0 },
-    blendMode: "NORMAL",
-  });
-  emitter2 = particles2.createEmitter({
-    speed: 100,
-    scale: { start: 0.03, end: 0 },
-    blendMode: "NORMAL",
-  });
-  emitter3 = particles3.createEmitter({
-    speed: 100,
-    scale: { start: 0.03, end: 0 },
-    blendMode: "NORMAL",
-  });
+  // particles = this.add.particles("particle");
+  // particles2 = this.add.particles("particle");
+  // particles3 = this.add.particles("particle");
+  // emitter = particles.createEmitter({
+  //   speed: 100,
+  //   scale: { start: 0.03, end: 0 },
+  //   blendMode: "NORMAL",
+  // });
+  // emitter2 = particles2.createEmitter({
+  //   speed: 100,
+  //   scale: { start: 0.03, end: 0 },
+  //   blendMode: "NORMAL",
+  // });
+  // emitter3 = particles3.createEmitter({
+  //   speed: 100,
+  //   scale: { start: 0.03, end: 0 },
+  //   blendMode: "NORMAL",
+  // });
 
   meteor = this.physics.add.image(100, 100, "meteor").setScale(0.1, 0.1);
   meteor.body.setCircle(250);
@@ -348,7 +402,7 @@ function create(a) {
   meteor.setBounce(1.01, 1.01);
   meteor.setCollideWorldBounds(true);
 
-  emitter.startFollow(meteor);
+  // emitter.startFollow(meteor);
 
   meteor2 = this.physics.add.image(700, 600, "meteor").setScale(0.1, 0.1);
   meteor2.body.setCircle(250);
@@ -357,7 +411,7 @@ function create(a) {
   meteor2.setBounce(1.01, 1.01);
   meteor2.setCollideWorldBounds(true);
 
-  emitter2.startFollow(meteor2);
+  // emitter2.startFollow(meteor2);
 
   meteor3 = this.physics.add.image(1200, 100, "meteor").setScale(0.1, 0.1);
   meteor3.body.setCircle(250);
@@ -366,8 +420,8 @@ function create(a) {
   meteor3.setBounce(1.01, 1.01);
   meteor3.setCollideWorldBounds(true);
 
-  emitter3.startFollow(meteor3);
-
+  // emitter3.startFollow(meteor3);
+  //
   //END METEOR
 
   //GAWANG
@@ -403,24 +457,24 @@ function create(a) {
   this.physics.add.collider(char1, char2, () => {
     console.log("kena");
   });
-  this.physics.add.collider(meteor, control1, () => {
-    music.play();
-  });
-  this.physics.add.collider(meteor2, control1, () => {
-    music.play();
-  });
-  this.physics.add.collider(meteor3, control1, () => {
-    music.play();
-  });
-  this.physics.add.collider(meteor, control2, () => {
-    music.play();
-  });
-  this.physics.add.collider(meteor2, control2, () => {
-    music.play();
-  });
-  this.physics.add.collider(meteor3, control2, () => {
-    music.play();
-  });
+  // this.physics.add.collider(meteor, control1, () => {
+  //   music.play();
+  // });
+  // this.physics.add.collider(meteor2, control1, () => {
+  //   music.play();
+  // });
+  // this.physics.add.collider(meteor3, control1, () => {
+  //   music.play();
+  // });
+  // this.physics.add.collider(meteor, control2, () => {
+  //   music.play();
+  // });
+  // this.physics.add.collider(meteor2, control2, () => {
+  //   music.play();
+  // });
+  // this.physics.add.collider(meteor3, control2, () => {
+  //   music.play();
+  // });
   this.physics.add.collider(meteor, meteor2, () => {
     music.play();
   });
@@ -435,66 +489,122 @@ function create(a) {
     console.log(data, "ini di game");
   });
 
-  console.log(boneX, boneY, 'ni di create')
-  // control1Hip1.setPosition(boneX,boneY)
-}
-
-function update() {
-  meteor.rotation += 0.1;
-  meteor2.rotation += 0.1;
-  meteor3.rotation += 0.1;
-  emitter.rotation += 0.1;
-  emitter2.rotation += 0.1;
-  emitter3.rotation += 0.1;
-  rightGoal.rotation += 0.002;
-  leftGoal.rotation -= 0.002;
-
   this.physics.add.collider(meteor, leftGoal, goalp2, () => {
     meteor.destroy();
-    particles.destroy();
+    // particles.destroy();
     goalSound.play();
   });
   this.physics.add.collider(meteor2, leftGoal, goalp2, () => {
     meteor2.destroy();
-    particles2.destroy();
+    // particles2.destroy();
     goalSound.play();
   });
   this.physics.add.collider(meteor3, leftGoal, goalp2, () => {
     meteor3.destroy();
-    particles3.destroy();
+    // particles3.destroy();
     goalSound.play();
   });
   this.physics.add.collider(meteor, rightGoal, goalp1, () => {
     meteor.destroy();
-    particles.destroy();
+    // particles.destroy();
     goalSound.play();
   });
   this.physics.add.collider(meteor2, rightGoal, goalp1, () => {
     meteor2.destroy();
-    particles2.destroy();
+    // particles2.destroy();
     goalSound.play();
   });
   this.physics.add.collider(meteor3, rightGoal, goalp1, () => {
     meteor3.destroy();
-    particles3.destroy();
+    // particles3.destroy();
     goalSound.play();
   });
 
   function goalp1() {
     scorep1 += 1;
     finish -= 1;
-    console.log(finish);
+    let payload = {
+      room: gamePlayers.room,
+      score: scorep1,
+      team: 'teamOne'
+    }
+    socket.emit('score', payload)
     scoreText.text = `${scorep1}:${scorep2}`;
   }
+  
   function goalp2() {
     scorep2 += 1;
     finish -= 1;
-    console.log(finish);
+    let payload = {
+      room: gamePlayers.room,
+      score: scorep2,
+      team: 'teamTwo'
+    }
+    socket.emit('score', payload)
     scoreText.text = `${scorep1}:${scorep2}`;
   }
 
-  const players = [control1, control1Hip1, control2, control1Hip2];
+  // control1Hip1.setPosition(boneX,boneY)
+}
+
+// function test (x, y) {
+//   console.log(boneX1, 'ni')
+//   // console.log(char1, "ni char")
+//   // char1.x = x
+//   // char1.y = y
+// }
+
+function update() {
+  // char1.setPosition()
+  // char kiri
+  // char1.x = boneX1
+  // char1.y = boneY1
+
+  // //character kanan
+  // char2.x = boneX2
+  // char2.y = boneY2
+  // console.log(char1, "ini char 1 di update", boneX1)
+
+  meteor.rotation += 0.1;
+  meteor2.rotation += 0.1;
+  meteor3.rotation += 0.1;
+  // emitter.rotation += 0.1;
+  // emitter2.rotation += 0.1;
+  // emitter3.rotation += 0.1;
+  rightGoal.rotation += 0.002;
+  leftGoal.rotation -= 0.002;
+
+  // function goalp1() {
+  //   scoreOne += 1;
+  //   finish -= 1;
+  //   let data = {
+  //     score: scoreOne,
+  //     username: localStorage.getItem('username'),
+  //     team: 'teamOne',
+  //     room: gamePlayers.room
+  //   }
+  //   socket.emit('goalP1', data)
+  //   console.log(finish);
+  //   scoreText.text = `${scoreOne}:${scoreTwo}`;
+  // }
+  // function goalp2() {
+  //   scoreTwo += 1;
+  //   finish -= 1;
+  //   let data = {
+  //     score: scoreTwo,
+  //     username: localStorage.getItem('username'),
+  //     team: 'teamTwo',
+  //     room: gamePlayers.room
+  //   }
+  //   console.log(finish);
+  //   socket.emit('goalP2', data)
+  //   scoreText.text = `${scoreOne}:${scoreTwo}`;
+  // }
+
+  // const players = [control1, control1Hip1, control2, control1Hip2];
+  const players = [control1Hip1, control1Hip2];
   players.forEach((el) => {
+    // console.log(control1Hip1, "ini")
     this.input.setDraggable(el);
     this.input.on(
       "drag",
@@ -505,7 +615,8 @@ function update() {
         var bone = gameObject.getData("bone");
 
         let charObj;
-        if (el === control1 || el === control1Hip1) {
+        // if (el === control1 || el === control1Hip1) {
+        if (el === control1Hip1) {
           charObj = char1;
         } else {
           charObj = char2;
@@ -517,16 +628,21 @@ function update() {
           charObj.skeleton,
           bone
         );
+        // let user = gamePlayers.room
+        // console.log(gamePlayers, "game players di room")
+        // console.log(dragX, "< ini dragX, ini dragY >", dragY)
 
         let cordinat = {
-          x: coords.x,
-          y: coords.y,
+          x: dragX,
+          y: dragY,
           username: localStorage.getItem("username"),
+          room: gamePlayers.room,
+          player: localStorage.getItem("username"),
         };
 
+        // console.log(cordinat, "ini player aktif");
 
-          this.data.list.socket.emit("moveBone", cordinat);
-
+        this.data.list.socket.emit("moveBone", cordinat);
 
         bone.x = coords.x;
         bone.y = coords.y;
@@ -548,6 +664,22 @@ function update() {
   // });
   // control.setPosition(boneX, boneY)
   // char1.setPosition(boneX, boneY)
+  if (isPosUpdated) {
+    // console.log(control1Hip1, "ini apa")
+    // control1Hip1.body.setPosition(boneX, boneY);
+    // char1.setPosition(boneX1, boneY1);
+    // char2.setPosition(boneX2, boneY2);
+    // char1.update()
+    // char2.update()
+    // console.log(char1.x ,'<>', boneX1 );
+    char1.x = boneX1
+    char1.y = boneY1
+    
+    char2.x = boneX2
+    char2.y = boneY2
+    // char1.update()
+    // char2.update()
+  }
 
 
   if (finish === 0) {
@@ -556,10 +688,6 @@ function update() {
 
   //   console.log(gamePlayers, "di dlm update")
 }
-console.log(gamePlayers, "di ; update");
-socket.on("hai", (data) => {
-  console.log(data, "data from update");
-  gamePlayers = data;
-});
+// console.log(gamePlayers, "di ; update");
 
 export default config;
