@@ -54,9 +54,6 @@ export default function CardRoom(props) {
           <div className="card player">
             <div className="card-body">{teamOne[1]}</div>
           </div>
-          <div className="card player">
-            <div className="card-body">{teamOne[2]}</div>
-          </div>
           <Button type="submit" className="nes-btn is-success mt-3 mr-3" onClick={() => handleJoinTeam('team1')}>
             Join
           </Button>
@@ -77,9 +74,6 @@ export default function CardRoom(props) {
           </div>
           <div className="card player">
             <div className="card-body">{teamTwo[1]}</div>
-          </div>
-          <div className="card player">
-            <div className="card-body">{teamTwo[2]}</div>
           </div>
           <Button type="submit" className="nes-btn is-success mt-3 mr-3" onClick={() => handleJoinTeam('team2')}>
             Join
