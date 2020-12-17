@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 // import Phaser from 'phaser'
 import { IonPhaser } from '@ion-phaser/react'
-import { config } from '../js/game'
+import { config } from '../js/newgame'
 import socket from '../connection/socket'
 
 export default function Board() {
