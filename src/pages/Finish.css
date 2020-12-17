@@ -1,0 +1,9 @@
+.buttonPlay{
+  background-color: #34495e;
+  color: white;
+  padding: 1rem
+}
+
+.buttonPlay:hover{
+  background-color: #7f8c8d;
+}

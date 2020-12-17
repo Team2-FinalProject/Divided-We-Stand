@@ -60,8 +60,9 @@ export default function Home() {
         loop
         style={{ display: "none"}}
       />
-      
-      <img src={img} className="mt-5 mb-5" style={{ justifyContent: "center" }} alt="" />
+      <div className="d-flex justify-content-center">
+        <img src={img} className="mt-5 mb-5" style={{ justifyContent: "center", width: "90%" }} alt="" />
+      </div>
       <form onSubmit={handleLogin} className="form mt-5">
         <div className="form-group">
           <input

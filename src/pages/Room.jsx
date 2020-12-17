@@ -5,6 +5,7 @@ import socket from "../connection/socket";
 import { useHistory } from "react-router-dom";
 import mp3 from '../sound/BGM/Cinematic_Drum.mp3'
 import ReactAudioPlayer from 'react-audio-player'
+import './Room.css'
 
 export default function Room() {
   const { roomName } = useParams();
@@ -43,16 +44,10 @@ export default function Room() {
         style={{ display: "none"}}
       />
       <div className="row justify-content-center align-content-center h-100 position-relative">
-        <div className="d-flex">
+        <div className="d-flex align-items-center">
           <div className="column">
-            <div className="card player">
+            <div className="card player mr-3">
               <div className="card-body">{roomDetail?.teamOne[0]}</div>
-            </div>
-            <div className="card player">
-              <div className="card-body">{roomDetail?.teamOne[1]}</div>
-            </div>
-            <div className="card player">
-              <div className="card-body">{roomDetail?.teamOne[2]}</div>
             </div>
           </div>
           <div>
@@ -63,18 +58,12 @@ export default function Room() {
             />
           </div>
           <div className="column">
-            <div className="card player">
+            <div className="card player ml-3">
               <div className="card-body">{roomDetail?.teamTwo[0]}</div>
-            </div>
-            <div className="card player">
-              <div className="card-body">{roomDetail?.teamTwo[1]}</div>
-            </div>
-            <div className="card player">
-              <div className="card-body">{roomDetail?.teamTwo[2]}</div>
             </div>
           </div>
         </div>
-        <Button className="position-absolute mt-5" style={{ top: "68%"}} onClick={handleStartGame}>
+        <Button className="position-absolute mt-5" style={{ top: "68%", backgroundColor: "#006266", border: "1px solid #006266", padding: "0.7rem"}} onClick={handleStartGame}>
           START
         </Button>
       </div>
