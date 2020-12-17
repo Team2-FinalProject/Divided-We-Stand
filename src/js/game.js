@@ -148,7 +148,7 @@ function assignControlToChar(char, obj) {
   var controlBones = ["front-leg-ik-target", "hip"];
 
   // var controlBones = ["front-leg-ik-target", "hip", "back-leg-ik-target"];
-  console.log(boneX, boneY, "ini diluar kondisi");
+  console.log(boneX, boneY, 'ini diluar kondisi')
   if (obj === "feet") {
     let bone = char.findBone(controlBones[0]);
     var control = this.physics.add
@@ -168,7 +168,7 @@ function assignControlToChar(char, obj) {
     //   function (pointer, gameObject, dragX, dragY) {
     //     gameObject.x = dragX;
     //     gameObject.y = dragY;
-    // bone.worldX, 800 - bone.worldY
+// bone.worldX, 800 - bone.worldY
     //     var bone = gameObject.getData("bone");
 
     //     // let charObj;
@@ -305,11 +305,11 @@ function create(a) {
   let char = generateChar.bind(this);
   let control = assignControlToChar.bind(this);
 
-  char1 = char({
-    pos: { x: boneX, y: boneY },
-    scale: { x: 0.3, y: 0.3 },
-    flipper: false,
-  });
+    char1 = char({
+      pos: { x: boneX, y: boneY },
+      scale: { x: 0.3, y: 0.3 },
+      flipper: false,
+    })
   char2 = char({
     pos: { x: 900, y: 500 },
     scale: { x: -0.3, y: 0.3 },
@@ -435,7 +435,7 @@ function create(a) {
     console.log(data, "ini di game");
   });
 
-  console.log(boneX, boneY, "ni di create");
+  console.log(boneX, boneY, 'ni di create')
   // control1Hip1.setPosition(boneX,boneY)
 }
 
@@ -524,7 +524,9 @@ function update() {
           username: localStorage.getItem("username"),
         };
 
-        this.data.list.socket.emit("moveBone", cordinat);
+
+          this.data.list.socket.emit("moveBone", cordinat);
+
 
         bone.x = coords.x;
         bone.y = coords.y;
@@ -546,6 +548,7 @@ function update() {
   // });
   // control.setPosition(boneX, boneY)
   // char1.setPosition(boneX, boneY)
+
 
   if (finish === 0) {
     localStorage.setItem("result", "endgame");
