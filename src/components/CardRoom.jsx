@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Card, Button } from "react-bootstrap";
 import socket from "../connection/socket";
 import { useHistory } from "react-router-dom";
+import './cardRoom.css'
 
 export default function CardRoom(props) {
   const { id, name, teamOne, teamTwo, status } = props.data;
@@ -31,7 +32,7 @@ export default function CardRoom(props) {
   return (
     <div className="nes-container with-title is-centered">
       <p className="title">{name}</p>
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-around">
         <div className="team-1">
           <span className="text-light">Team 1</span>
           {/* {teamOne.map((e) => (
@@ -39,12 +40,9 @@ export default function CardRoom(props) {
               <div className="card-body">{e}</div>
             </div>
           ))} */}
-          <div className="card player">
-            <div className="card-body">{teamOne[0]}</div>
+          <div className="card">
+            <div className="card-body" style={{padding: "0.5rem"}}>{teamOne[0]}</div>
           </div>
-          {/* <div className="card player">
-            <div className="card-body">{teamOne[1]}</div>
-          </div> */}
           <Button type="submit" className="nes-btn is-success mt-3 mr-3" onClick={() => handleJoinTeam('team1')}>
             Join
           </Button>
@@ -60,12 +58,9 @@ export default function CardRoom(props) {
               <div className="card-body">{e}</div>
             </div>
           ))} */}
-          <div className="card player">
-            <div className="card-body">{teamTwo[0]}</div>
+          <div className="card">
+            <div className="card-body" style={{padding: "0.5rem"}}>{teamTwo[0]}</div>
           </div>
-          {/* <div className="card player">
-            <div className="card-body">{teamTwo[1]}</div>
-          </div> */}
           <Button type="submit" className="nes-btn is-success mt-3 mr-3" onClick={() => handleJoinTeam('team2')}>
             Join
           </Button>
@@ -74,3 +69,15 @@ export default function CardRoom(props) {
     </div>
       )
 }
+
+
+
+// .card.player {
+//     width: 170px;
+//     height: 64px;
+//     margin-top: 10px;
+
+// .card-body {
+//   flex: 1 1 auto;
+//   min-height: 1px;
+//   padding: 1.25rem;

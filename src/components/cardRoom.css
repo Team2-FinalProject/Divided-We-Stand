@@ -1,0 +1,21 @@
+/* // .card.player {
+  //     width: 170px;
+  //     height: 64px;
+  //     margin-top: 10px;
+  
+  // .card-body {
+  //   flex: 1 1 auto;
+  //   min-height: 1px;
+  //   padding: 1.25rem; */
+
+.card{
+  width: 7rem;
+  height: 2.5rem;
+  margin-top: 0.5rem;
+  margin-left: 0.4rem;
+}
+
+.card-body {
+  flex: 1 1 auto;
+  min-height: 1px;
+}
