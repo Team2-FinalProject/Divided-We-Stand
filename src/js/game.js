@@ -426,10 +426,10 @@ function create() {
 
   //GAWANG
   leftGoal = this.physics.add.image(100, 350, "goal").setScale(0.5, 0.5);
-  leftGoal.body.setSize(100, 100);
+  leftGoal.body.setSize(500, 500);
   leftGoal.body.immovable = true;
   rightGoal = this.physics.add.image(1250, 350, "goal").setScale(0.5, 0.5);
-  rightGoal.body.setSize(100, 100);
+  rightGoal.body.setSize(500, 500);
   rightGoal.body.immovable = true;
   //END GAWANG
 

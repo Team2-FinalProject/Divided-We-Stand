@@ -46,24 +46,24 @@ export default function Game() {
     setGame(Object.assign({}, configs))
   }, [])
 
-  // let int = setInterval(() => {
-  //   setResult(localStorage.getItem('result'))
-  // }, 1000)
+  let int = setInterval(() => {
+    setResult(localStorage.getItem('result'))
+  }, 1000)
 
 
-  // useEffect(() => {
-  //   if(result === 'endgame') {
-  //     history.push('/finish')
-  //     setGame(null)
-  //     setinitialize(false)
-  //     clearInterval(int)
-  //     alert("game Finish")
-  //   }
-  //   return () => {
-  //     setGame(null)
-  //     setinitialize(false)
-  //   }
-  // }, [result])
+  useEffect(() => {
+    if(result === 'endgame') {
+      history.push('/finish')
+      setGame(null)
+      setinitialize(false)
+      clearInterval(int)
+      alert("game Finish")
+    }
+    return () => {
+      setGame(null)
+      setinitialize(false)
+    }
+  }, [result])
 
   return (
     <>
