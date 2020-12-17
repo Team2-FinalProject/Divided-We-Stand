@@ -3,15 +3,15 @@ import { useHistory } from 'react-router-dom'
 import ReactAudioPlayer from 'react-audio-player'
 import mp3 from '../sound/BGM/Siddartha.mp3'
 
-export default function Finish() {
+function Finish() {
     const history = useHistory()
     const toHome = () => {
         history.push('/')
     }
-    //     height: 200px;
-    //   position: relative;
     return (
-        <div className="container-fluid" style={{ height: "43rem", position: "relative" }}>
+        <div>
+            <div style={{ position: "fixed", left: "0", right: "0", width: "1366px", height: "667px", zIndex: "10", backgroundImage: url("https://wallpaperaccess.com/full/17520.jpg")}}>
+            <div className="container-fluid" style={{ height: "43rem", position: "relative" }}>
             <ReactAudioPlayer
                 controls
                 autoPlay
@@ -23,5 +23,9 @@ export default function Finish() {
                 <button onClick={() => toHome()}>Play Again</button>
             </div>
         </div>
+            </div>
+        </div>
     )
 }
+
+export default Finish
